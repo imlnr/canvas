@@ -123,13 +123,13 @@ const First = () => {
 
 
     return (
-        <div className="">
+        <div className="flex justify-center items-center w-full h-screen">
             <canvas ref={canvasRef} height={1080} width={1080} style={{ width: "400px", height: "400px" }}></canvas>
-            <div>
+            {/* <div>
                 <p>Live Coordinates:</p>
                 <p>X: {coordinates.x}</p>
                 <p>Y: {coordinates.y}</p>
-            </div>
+            </div> */}
         </div>
     );
 };

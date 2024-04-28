@@ -4,9 +4,7 @@ import { MuiColorInput } from 'mui-color-input';
 
 const Custom = () => {
     const [colorValue, setColorValue] = useState('#afe46c');
-    const handleColorChange = (newValue) => {
-        setColorValue(newValue);
-    };
+    
 
     const canvasRef = useRef(null);
     const [imageUrl, setImageUrl] = useState('https://sugargeekshow.com/wp-content/uploads/2022/08/vanilla_cupcake_featured_blog.jpg');
@@ -43,7 +41,17 @@ const Custom = () => {
 
         return lines;
     }
-
+    const [colors, setcolors] = useState(['#afe46c', '#4b652a', '#2cbfdf', '#b417ce', '#de0c71'])
+    const handleColorChange = (newValue) => {
+        setColorValue(newValue);
+        setcolors(prevColors => {
+            const temp = [...prevColors];
+            temp.unshift(newValue); 
+            temp.pop(); 
+            return temp;
+        });
+    };
+    
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
@@ -91,7 +99,7 @@ const Custom = () => {
         ctx.fillStyle = 'black';
         ctx.font = '30px Arial';
         const textX = 700 + 200 / 2 - ctx.measureText(cta).width / 2;
-        const textY = 850 + 80 / 2 + 6; // Adjust 6 to vertically center the text
+        const textY = 850 + 80 / 2 + 6;
         ctx.fillText(cta, textX, textY);
 
     }, [colorValue, imageUrl, text, cta]);
@@ -113,10 +121,15 @@ const Custom = () => {
                         <TextField value={text} onChange={(e) => setText(e.target.value)} fullWidth margin='normal' label="Ad Content" />
                     </Box>
                     <Box>
-                        <TextField value={cta} onChange={(e)=>setcta(e.target.value)} fullWidth margin='normal' label="CTA" />
+                        <TextField value={cta} onChange={(e) => setcta(e.target.value)} fullWidth margin='normal' label="CTA" />
                     </Box>
-                    <small>Choose your color</small>
-                    <MuiColorInput format='hex' value={colorValue} onChange={handleColorChange}></MuiColorInput>
+                    {/* <small>Choose your color</small> */}
+                    <MuiColorInput label='Choose your color' margin='normal' format='hex' value={colorValue} onChange={handleColorChange}></MuiColorInput>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        {colors.map((item) => (
+                            <Box key={item} height={'20px'} width={'20px'} onClick={()=> setColorValue(item)} sx={{ backgroundColor: item,borderRadius:"50%" ,cursor:'pointer'}}></Box>
+                        ))}
+                    </Box>
                 </Box>
             </Box>
         </Box>

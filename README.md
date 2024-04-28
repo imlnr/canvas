@@ -3,6 +3,24 @@
 Welcome to Canvas ! 🎨 We specialize in providing customizable ad templates to enhance your marketing campaigns. Our platform offers a wide range of professionally designed templates that you can easily customize to suit your brand's style and messaging. Whether you're looking to create eye-catching social media ads, engaging email campaigns, or stunning website banners, we've got you covered. Join our community and take your advertising efforts to the next level!
 
 
+
+## Home page
+
+![image](https://github.com/imlnr/canvas/assets/82680213/6546457a-2b44-4c2d-9d7a-3334e634c4c2)
+
+
+
+## KFC Template
+
+![image](https://github.com/imlnr/canvas/assets/82680213/4fd2cd13-d1bc-4efc-b7c9-9e4967b020be)
+
+
+## Ad Customizaion Template for (Cards)
+
+
+![image](https://github.com/imlnr/canvas/assets/82680213/a5b083ce-d17c-4211-b879-203d85baf008)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

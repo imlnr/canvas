@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import kfcs from '../assets/kfc.png';
 import add from '../assets/ad.png'
 import { Link } from 'react-router-dom';
+import Custom from './Custom';
 
 const images = [
     {
@@ -92,41 +93,40 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 const Home = () => {
     return (
-        <Box>
-            {images.map(image => (
-                <Link to={image.link}>
-                    <ImageButton
-                        focusRipple
-                        key={image.title}
-                        style={{
-                            width: image.width,
-                            height: image.height,
-                        }}
-                    >
-                        <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-                        <ImageBackdrop className="MuiImageBackdrop-root" />
-                        <Image>
-                            <Typography
-                                component="span"
-                                variant="subtitle1"
-                                color="inherit"
-                                sx={{
-                                    position: 'relative',
-                                    p: 4,
-                                    pt: 2,
-                                    pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                                }}
-                            >
-                                {image.title}
-                                <ImageMarked className="MuiImageMarked-root" />
-                            </Typography>
-                        </Image>
-                    </ImageButton>
-                </Link>
-            ))}
-
-
-        </Box>
+        // <Box>
+        //     {images.map(image => (
+        //         <Link to={image.link}>
+        //             <ImageButton
+        //                 focusRipple
+        //                 key={image.title}
+        //                 style={{
+        //                     width: image.width,
+        //                     height: image.height,
+        //                 }}
+        //             >
+        //                 <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+        //                 <ImageBackdrop className="MuiImageBackdrop-root" />
+        //                 <Image>
+        //                     <Typography
+        //                         component="span"
+        //                         variant="subtitle1"
+        //                         color="inherit"
+        //                         sx={{
+        //                             position: 'relative',
+        //                             p: 4,
+        //                             pt: 2,
+        //                             pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+        //                         }}
+        //                     >
+        //                         {image.title}
+        //                         <ImageMarked className="MuiImageMarked-root" />
+        //                     </Typography>
+        //                 </Image>
+        //             </ImageButton>
+        //         </Link>
+        //     ))}
+        // </Box>
+        <Custom/>
     )
 }
 

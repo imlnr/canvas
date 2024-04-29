@@ -3,12 +3,44 @@ import { Box, Input, TextField, Typography } from '@mui/material';
 import { MuiColorInput } from 'mui-color-input';
 
 const Custom = () => {
-    const [colorValue, setColorValue] = useState('#afe46c');
-    
+
+    // const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+    const image = 'https://static.vecteezy.com/system/resources/thumbnails/025/282/026/small/stock-of-mix-a-cup-coffee-latte-more-motive-top-view-foodgraphy-generative-ai-photo.jpg';
+    const kfcimg = 'https://1000logos.net/wp-content/uploads/2022/06/Logo-KFC.png'
+
+    const data = {
+        "caption": {
+            "text": "1 & 2 BHK Luxury Apartments at just Rs.34.97 Lakhs",
+            "position": { "x": 60, "y": 120 },
+            "max_characters_per_line": 31,
+            "font_size": 40,
+            "alignment": "left",
+            "text_color": "#FFFFFF"
+        },
+        "cta": {
+            "text": "Shop Now",
+            "position": { "x": 60, "y": 220 },
+            "text_color": "#FFFFFF",
+            "background_color": "#000000"
+        },
+        "image_mask": {
+            "x": 56,
+            "y": 442,
+            "width": 970,
+            "height": 600
+        },
+        "urls": {
+            "mask": "https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_mask.png",
+            "stroke": "https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_Mask_stroke.png",
+            "design_pattern": "https://d273i1jagfl543.cloudfront.net/templates/global_temp_landscape_temp_10_Design_Pattern.png"
+        }
+    };
+    const [colorValue, setColorValue] = useState('#a3080c');
+
 
     const canvasRef = useRef(null);
-    const [imageUrl, setImageUrl] = useState('https://sugargeekshow.com/wp-content/uploads/2022/08/vanilla_cupcake_featured_blog.jpg');
-    const [text, setText] = useState('Treate yourself to a divine Blueberry Cake - INR 900.00!')
+    const [imageUrl, setImageUrl] = useState('https://static.vecteezy.com/system/resources/thumbnails/025/282/026/small/stock-of-mix-a-cup-coffee-latte-more-motive-top-view-foodgraphy-generative-ai-photo.jpg');
+    const [textdata, setText] = useState('1 & 2 BHK Luxury Apartments at just Rs.34.97 Lakhs')
     const [cta, setcta] = useState('Contact Us')
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -46,68 +78,119 @@ const Custom = () => {
         setColorValue(newValue);
         setcolors(prevColors => {
             const temp = [...prevColors];
-            temp.unshift(newValue); 
-            temp.pop(); 
-            return temp;
+            // temp.unshift(newValue);
+            temp.pop();
+            return [newValue, ...temp];
         });
     };
-    
+
+    // useEffect(() => {
+    //     const canvas = canvasRef.current;
+    //     const ctx = canvas.getContext("2d");
+
+    //     // Clear canvas
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //     //circle
+    //     ctx.arc(540, 780, 100, 0, 2 * Math.PI);
+    //     ctx.stroke();
+
+    //     // Draw shape
+    //     ctx.beginPath();
+    //     ctx.moveTo(100, 0);
+    //     ctx.lineTo(700, 1080);
+    //     ctx.lineTo(1080, 1080);
+    //     ctx.lineTo(1080, 700);
+    //     ctx.lineTo(680, 0);
+    //     ctx.lineWidth = 1;
+    //     ctx.fillStyle = colorValue;
+    //     ctx.fill();
+
+    //     // Load and draw image
+    //     const image = new Image();
+    //     image.onload = () => {
+    //         ctx.save();
+    //         ctx.beginPath();
+    //         ctx.rect(150, 60, 760, 760);
+    //         ctx.clip();
+    //         ctx.drawImage(image, 150, 60, 760, 760);
+    //         ctx.restore();
+    //     };
+    //     image.src = imageUrl;
+    //     ctx.font = '30px Arial';
+    //     const maxCharperLine = 30;
+    //     // const text = text;
+    //     const lines = splitText(text, maxCharperLine)
+    //     ctx.textAlign = 'left';
+    //     ctx.fillStyle = 'black'
+    //     lines.forEach((line, index) => {
+    //         ctx.fillText(line, 150, 900 + index * (30 + 5));
+    //     });
+    //     ctx.fillStyle = 'white';
+    //     ctx.fillRect(700, 850, 200, 80);
+    //     ctx.fillStyle = 'black';
+    //     ctx.font = '30px Arial';
+    //     const textX = 700 + 200 / 2 - ctx.measureText(cta).width / 2;
+    //     const textY = 850 + 80 / 2 + 6;
+    //     ctx.fillText(cta, textX, textY);
+
+    // }, [colorValue, imageUrl, text, cta]);
+    console.log(colorValue, imageUrl, textdata, cta);
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        //circle
-        ctx.arc(540, 780, 100, 0, 2 * Math.PI);
+        //Draw Background
+        ctx.fillStyle = colorValue;
+        ctx.fillRect(0, 0, 1080, 850);
+        console.log(ctx.canvas.width);
+        //Draw Border
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 5;
+        ctx.rect(57, 557, 955, 523);
         ctx.stroke();
 
-        // Draw shape
-        ctx.beginPath();
-        ctx.moveTo(100, 0);
-        ctx.lineTo(700, 1080);
-        ctx.lineTo(1080, 1080);
-        ctx.lineTo(1080, 700);
-        ctx.lineTo(680, 0);
-        ctx.lineWidth = 1;
-        ctx.fillStyle = colorValue;
-        ctx.fill();
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+            ctx.drawImage(img, 60, 560, 950, 510);
 
-        // Load and draw image
-        const image = new Image();
-        image.onload = () => {
-            ctx.save();
-            ctx.beginPath();
-            ctx.rect(150, 60, 760, 760);
-            ctx.clip();
-            ctx.drawImage(image, 150, 60, 760, 760);
-            ctx.restore();
         };
-        image.src = imageUrl;
-        ctx.font = '30px Arial';
-        const maxCharperLine = 30;
-        // const text = text;
-        const lines = splitText(text, maxCharperLine)
-        ctx.textAlign = 'left';
-        ctx.fillStyle = 'black'
-        lines.forEach((line, index) => {
-            ctx.fillText(line, 150, 900 + index * (30 + 5));
-        });
-        ctx.fillStyle = 'white';
-        ctx.fillRect(700, 850, 200, 80);
-        ctx.fillStyle = 'black';
-        ctx.font = '30px Arial';
-        const textX = 700 + 200 / 2 - ctx.measureText(cta).width / 2;
-        const textY = 850 + 80 / 2 + 6;
-        ctx.fillText(cta, textX, textY);
+        ctx.fillStyle = 'white'
+        ctx.fillRect(660, 10, 270, 180);
+        // ctx.Stroke();
+        const kfc = new Image();
+        kfc.src = kfcimg;
+        kfc.onload = () => {
+            ctx.beginPath();
+            ctx.drawImage(kfc, 640, 30, 300, 180);
+            // ctx.clip();
+            // ctx.fill();
+        };
 
-    }, [colorValue, imageUrl, text, cta]);
+        ctx.font = `${data.caption.font_size}px Arial`;
+        const maxCharactersPerLine = data.caption.max_characters_per_line;
+        // const text = textdata;
+        const lines = splitText(textdata, maxCharactersPerLine);
+        ctx.fillStyle = data.caption.text_color;
+        ctx.textAlign = data.caption.alignment;
+        lines.forEach((line, index) => {
+            ctx.fillText(line, data.caption.position.x, data.caption.position.y + index * (data.caption.font_size + 5));
+        });
+        //Button Shop now
+        // ctx.fillRect()
+        ctx.fillStyle = data.cta.text_color;
+        ctx.fillRect(data.cta.position.x, data.cta.position.y, 200, 80);
+        ctx.fillStyle = data.cta.background_color;
+        ctx.font = '30px Arial';
+        const textX = data.cta.position.x + 200 / 2 - ctx.measureText(data.cta.text).width / 2;
+        const textY = data.cta.position.y + 80 / 2 + 6; // Adjust 6 to vertically center the text
+        ctx.fillText(cta, textX, textY);
+    }, [imageUrl, colorValue, textdata, cta]);
 
     return (
         <Box sx={{ height: "100vh", display: "flex", width: "100%" }}>
             <Box sx={{ background: "#f0f0f0", width: "40%", display: "flex", alignItems: "center", justifyContent: "center" }} >
-                <canvas ref={canvasRef} width={1080} height={1080} style={{ width: "500px", height: "500px", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}></canvas>
+                <canvas ref={canvasRef} width={1080} height={1080} style={{ width: "500px", height: "500px" }}></canvas>
             </Box>
             <Box sx={{ width: "60%", display: "flex", alignItems: 'center', justifyContent: "center" }} >
                 <Box sx={{ width: "80%", display: "flex", justifyContent: "center", flexDirection: "column" }}>
@@ -116,9 +199,9 @@ const Custom = () => {
                     <Box sx={{ marginY: "20px" }}>
                         <Typography variant='paragraph'>Change the ad creative image. <Input type='file' onChange={handleImageChange}></Input></Typography>
                     </Box>
-                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-around", marginY: "20px" }}><Box sx={{ borderTop: "1px solid", width: "100%" }}></Box><Typography textAlign={'center'} sx={{ width: "30%" }}>Edit Contents</Typography><Box sx={{ borderTop: "1px solid", width: "100%" }}></Box></Box>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-around", marginY: "20px" }}><Box sx={{ borderTop: "1px solid", width: "100%" }}></Box><Typography textAlign={'center'} sx={{ width: "30%" ,marginX:"2%"}}>Edit Contents</Typography><Box sx={{ borderTop: "1px solid", width: "100%" }}></Box></Box>
                     <Box>
-                        <TextField value={text} onChange={(e) => setText(e.target.value)} fullWidth margin='normal' label="Ad Content" />
+                        <TextField value={textdata} onChange={(e) => setText(e.target.value)} fullWidth margin='normal' label="Ad Content" />
                     </Box>
                     <Box>
                         <TextField value={cta} onChange={(e) => setcta(e.target.value)} fullWidth margin='normal' label="CTA" />
@@ -127,7 +210,7 @@ const Custom = () => {
                     <MuiColorInput label='Choose your color' margin='normal' format='hex' value={colorValue} onChange={handleColorChange}></MuiColorInput>
                     <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         {colors.map((item) => (
-                            <Box key={item} height={'20px'} width={'20px'} onClick={()=> setColorValue(item)} sx={{ backgroundColor: item,borderRadius:"50%" ,cursor:'pointer'}}></Box>
+                            <Box key={item} height={'20px'} width={'20px'} onClick={() => setColorValue(item)} sx={{ backgroundColor: item, borderRadius: "50%", cursor: 'pointer' }}></Box>
                         ))}
                     </Box>
                 </Box>

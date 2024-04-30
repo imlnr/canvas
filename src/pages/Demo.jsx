@@ -442,14 +442,11 @@ const Custom = () => {
         };
         ctx.fillStyle = 'white'
         ctx.fillRect(660, 10, 270, 180);
-        // ctx.Stroke();
         const kfc = new Image();
         kfc.src = kfcimg;
         kfc.onload = () => {
             ctx.beginPath();
             ctx.drawImage(kfc, 640, 30, 300, 180);
-            // ctx.clip();
-            // ctx.fill();
         };
 
         ctx.font = `${data.caption.font_size}px Arial`;
